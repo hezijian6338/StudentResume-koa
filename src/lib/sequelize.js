@@ -1,7 +1,10 @@
 import Sequelize from 'sequelize'
-import { DB as DBConfig, System as SystemConfig } from '../config'
+import {
+  DB as DBConfig,
+  System as SystemConfig
+} from '../config'
 
-export default new Sequelize(DBConfig.database, DBConfig.username, DBConfig.password, {
+const sequelize = new Sequelize(DBConfig.database, DBConfig.username, DBConfig.password, {
   host: DBConfig.host,
   dialect: SystemConfig.db_type,
   dialectOptions: { // MySQL > 5.5，其它数据库删除此项
@@ -16,3 +19,4 @@ export default new Sequelize(DBConfig.database, DBConfig.username, DBConfig.pass
     idle: 10000
   }
 })
+module.exports = sequelize
