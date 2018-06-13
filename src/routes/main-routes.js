@@ -3,8 +3,7 @@ import controllers from '../controllers/index.js'
 
 const router = new KoaRouter()
 
-
-router.use('/api/students', controllers.students.routes(), controllers.students.allowedMethods());
+router.use('/api/students', controllers.students.routes(), controllers.students.allowedMethods())
 
 router
   .get('/public/get', function (ctx, next) {

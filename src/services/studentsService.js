@@ -10,5 +10,12 @@ module.exports = {
         STUDENTNO: stuNo
       }
     })
+  },
+  getStudentsByLimit: (limit, page) => {
+    return stu.findAndCountAll({
+      where: '',
+      offset: page,
+      limit: limit * 1
+    })
   }
 }

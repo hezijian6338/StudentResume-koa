@@ -5,12 +5,36 @@ const router = require('koa-router')()
 let stuSer = services.studentsService
 
 router.get('/', async (ctx, next) => {
+  var ctxQuery = ctx.query
   console.log(ctx.query)
-  ctx.body = await stuSer.getStudents()
+  if (ctxQuery.page != null || ctxQuery.limit != null) {
+    var page = (ctxQuery.page - 1) * ctxQuery.limit
+    var student = await stuSer.getStudentsByLimit(ctxQuery.limit, page)
+  } else {
+    student = await stuSer.getStudents()
+  }
+  ctx.body = {
+    result: 'get',
+    name: ctx.params,
+    para: ctx.query,
+    stuInfo: student
+  }
 })
 router.get('/:info', async (ctx, next) => {
   //   ctx.body = await getUserList(ctx, next);
   var student = await stuSer.getStudentByNo(ctx.params.info)
+  ctx.body = {
+    result: 'get',
+    name: ctx.params.info,
+    para: ctx.query,
+    stuInfo: student
+  }
+})
+router.get('/:limit/:page', async (ctx, next) => {
+  //   ctx.body = await getUserList(ctx, next);
+  var ctxParams = ctx.params
+  var page = (ctxParams.page - 1) * ctxParams.limit
+  var student = await stuSer.getStudentsByLimit(ctxParams.limit, page)
   ctx.body = {
     result: 'get',
     name: ctx.params.info,
