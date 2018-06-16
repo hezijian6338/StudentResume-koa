@@ -1,7 +1,7 @@
 import db from '../lib/sequelize'
 import Sequelize from 'sequelize'
 var Students = db.define('t_students', {
-  'STU_ID': {
+  STU_ID: {
     type: Sequelize.STRING(32),
     primaryKey: true
   },

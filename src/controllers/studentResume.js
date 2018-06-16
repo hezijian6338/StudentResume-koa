@@ -2,16 +2,16 @@ import services from '../services/index'
 
 const router = require('koa-router')()
 
-let stuSer = services.studentsService
+let stuResumeSer = services.studentResumeService
 
 router.get('/', async (ctx, next) => {
   var ctxQuery = ctx.query
   console.log(ctx.query)
   if (ctxQuery.page != null || ctxQuery.limit != null) {
     var page = (ctxQuery.page - 1) * ctxQuery.limit
-    var student = await stuSer.getStudentsByLimit(ctxQuery.limit, page)
+    var student = await stuResumeSer.getStudentsByLimit(ctxQuery.limit, page)
   } else {
-    student = await stuSer.getStudents()
+    student = await stuResumeSer.getStudentResumeByNo()
   }
   ctx.body = {
     result: 'get',
@@ -22,11 +22,21 @@ router.get('/', async (ctx, next) => {
 })
 router.get('/:info', async (ctx, next) => {
   //   ctx.body = await getUserList(ctx, next);
-  var student = await stuSer.getStudentByNo(ctx.params.info)
+  var student = await stuResumeSer.getStudentResumeByNo(ctx.params.info)
   ctx.body = {
     result: 'get',
     name: ctx.params.info,
     para: ctx.query,
+    stuInfo: student
+  }
+})
+router.put('/', async (ctx, next) => {
+  console.log(ctx.request.body)
+  var student = await stuResumeSer.updateStudentResumeSkillByNo(ctx.request.body)
+  ctx.body = {
+    result: 'put',
+    name: ctx.params.info,
+    para: ctx.request.body,
     stuInfo: student
   }
 })

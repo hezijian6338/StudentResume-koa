@@ -5,6 +5,8 @@ const router = new KoaRouter()
 
 router.use('/api/students', controllers.students.routes(), controllers.students.allowedMethods())
 
+router.use('/api/student-resume', controllers.studentResume.routes(), controllers.studentResume.allowedMethods())
+
 router
   .get('/public/get', function (ctx, next) {
     ctx.body = '禁止访问！'
