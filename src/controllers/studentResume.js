@@ -20,24 +20,29 @@ router.get('/', async (ctx, next) => {
     stuInfo: student
   }
 })
-router.get('/:info', async (ctx, next) => {
-  //   ctx.body = await getUserList(ctx, next);
-  var student = await stuResumeSer.getStudentResumeByNo(ctx.params.info)
+router.get('/:id', async (ctx, next) => {
+  var studentResume = await stuResumeSer.getStudentResumeByNo(ctx.params.id)
   ctx.body = {
     result: 'get',
-    name: ctx.params.info,
-    para: ctx.query,
-    stuInfo: student
+    name: ctx.params.id,
+    para: ctx.request.body,
+    stuInfo: studentResume
   }
 })
-router.put('/', async (ctx, next) => {
-  console.log(ctx.request.body)
-  var student = await stuResumeSer.updateStudentResumeSkillByNo(ctx.request.body)
+router.put('/:info', async (ctx, next) => {
+  console.log(ctx.request.body.fields)
+  var ctxRequest = ctx.request.body
+  var studentResume
+  if (ctxRequest.info === 'skill') {
+    studentResume = await stuResumeSer.updateStudentResumeSkillByNo(ctx.request.body.fields)
+  } else {
+    studentResume = await stuResumeSer.updateStudentResumeBaseInfoByNo(ctx.request.body.fields)
+  }
   ctx.body = {
     result: 'put',
     name: ctx.params.info,
     para: ctx.request.body,
-    stuInfo: student
+    stuInfo: studentResume
   }
 })
 router.post('/:info', async (ctx, next) => {

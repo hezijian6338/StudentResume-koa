@@ -24,11 +24,20 @@ module.exports = {
   },
   updateStudentResumeBaseInfoByNo: (stu) => {
     return stuResume.update({
-
-    },{
-        where: {
-            studentno: stu.studentno
-        }
+      jobwant: stu.jobwant,
+      mojor: stu.major,
+      email: stu.email,
+      mobileno: stu.mobileno,
+      selfevaluation: stu.selfevaluation,
+      org_name: stu.org_name,
+      schoolname: stu.schoolname,
+      majorinfo: stu.majorinfo,
+      englishlevel: stu.englishlevel,
+      sofewareskills: stu.sofewareskills
+    }, {
+      where: {
+        studentno: stu.studentno
+      }
     })
   }
 }

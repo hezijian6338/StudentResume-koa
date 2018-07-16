@@ -15,7 +15,7 @@ export let System = {
 }
 
 export let DB = {
-  host: 'localhost', // 服务器地址
+  host: '192.168.150.180', // 服务器地址
   port: 3306, // 数据库端口号
   username: 'root', // 数据库用户名
   password: '12345', // 数据库密码

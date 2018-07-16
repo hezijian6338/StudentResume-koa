@@ -17,9 +17,5 @@ router
   .put('/api/:name/:info', controllers.api.Put)
   .del('/api/:name/:info', controllers.api.Delect)
   .post('/auth/:action', controllers.auth.Post)
-  // .get('/get/students/:info', controllers.students.Get)
-  // .post('/get/students/:info', controllers.students.Post)
-  // .put('/get/students/:info', controllers.students.Put)
-  // .del('/get/students/:info', controllers.students.Delect)
 
 module.exports = router
